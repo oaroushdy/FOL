@@ -1,6 +1,8 @@
-package ai.logic.utilities;
+package ai.logic.utilities.sentence.term.atom;
 
 import java.util.ArrayList;
+
+import ai.logic.utilities.sentence.term.Atom;
 
 public class Predicate extends Atom {
 

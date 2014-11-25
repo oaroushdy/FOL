@@ -1,4 +1,6 @@
-package ai.logic.utilities;
+package ai.logic.utilities.sentence.term.atom;
+
+import ai.logic.utilities.sentence.term.Atom;
 
 public class Constant extends Atom {
 	public String value;

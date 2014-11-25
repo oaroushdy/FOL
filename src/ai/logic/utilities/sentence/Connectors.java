@@ -1,4 +1,7 @@
-package ai.logic.utilities;
+package ai.logic.utilities.sentence;
+
+import ai.logic.utilities.CF;
+import ai.logic.utilities.Sentence;
 
 public class Connectors extends Sentence implements CF {
 
