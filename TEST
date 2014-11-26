@@ -2,7 +2,7 @@ TESTING:
 
  Test each Step independently:
 - Step 1: remove iff:
-	 Sentence with iff
+	 Sentence with iff : (a V b) <=> (c AND D)
 	 Sentence without iff
 
 - Step 2: RemoveIF():
