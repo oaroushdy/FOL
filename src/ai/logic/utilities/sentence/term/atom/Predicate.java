@@ -1,6 +1,7 @@
 package ai.logic.utilities.sentence.term.atom;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import ai.logic.utilities.Common;
 import ai.logic.utilities.sentence.term.Atom;
@@ -20,7 +21,38 @@ public class Predicate extends Atom {
 		this.isNegative = isNegative;
 
 	}
-	
+
+	public Predicate(String predicateName, ArrayList<Atom> value) {
+
+		this.predicateName = predicateName;
+		this.value = value;
+		this.isNegative = false;
+
+	}
+
+	public Predicate(String predicateName, Atom[] value) {
+
+		this.predicateName = predicateName;
+		this.value = new ArrayList<Atom>(Arrays.asList(value));
+		this.isNegative = false;
+
+	}
+
+	public Predicate(String predicateName, Atom value, boolean isNegative) {
+		this.value = new ArrayList<>();
+		this.predicateName = predicateName;
+		this.value.add(value);
+		this.isNegative = isNegative;
+
+	}
+
+	public Predicate(String predicateName, Atom value) {
+		this.value = new ArrayList<>();
+		this.predicateName = predicateName;
+		this.value.add(value);
+		this.isNegative = false;
+
+	}
 
 	public Predicate(Predicate p, ArrayList<Variable> domain) {
 		this.predicateName = p.predicateName;
@@ -44,7 +76,7 @@ public class Predicate extends Atom {
 		String x = "";
 		for (Atom v : value)
 			x += v.toString() + ",";
-		x=x.substring(0, x.length() - 1);
+		x = x.substring(0, x.length() - 1);
 		if (isNegative)
 			return Common.NOT + predicateName + "(" + x + ")";
 		else
@@ -55,13 +87,13 @@ public class Predicate extends Atom {
 		String x = " ";
 		for (Atom v : value)
 			x += v.toString() + " , ";
-		x=x.substring(0, x.length() - 2);
+		x = x.substring(0, x.length() - 2);
 		if (isNegative)
 			return Common.NOT + predicateName + "(" + x + ")";
 		else
 			return predicateName + "(" + x + ")";
 	}
-	
+
 	@Override
 	public void Step7Expand() {
 		// TODO Auto-generated method stub

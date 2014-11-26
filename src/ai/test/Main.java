@@ -2,6 +2,7 @@ package ai.test;
 
 import java.util.ArrayList;
 
+import ai.logic.main.Unifier;
 import ai.logic.utilities.sentence.term.Atom;
 import ai.logic.utilities.sentence.term.atom.Constant;
 import ai.logic.utilities.sentence.term.atom.Predicate;
@@ -10,27 +11,23 @@ import ai.logic.utilities.sentence.term.atom.Variable;
 public class Main {
 
 	public static void main(String[] args) {
-		ArrayList<Atom> value = new ArrayList<>();
-		ArrayList<Atom> valuef = new ArrayList<>();
-		ArrayList<Atom> valueg = new ArrayList<>();
+		// Older(Father(y),y),Older(Father(x),John)
 
-		value.add(new Constant("A", false));
-		value.add(new Variable("x", false));
-		value.add(new Variable("y", false));
+		Variable x = new Variable("x");
+		Variable y = new Variable("y");
+		Constant john = new Constant("john");
 
-		Atom a = new Predicate("p", value, false);
+		Predicate f1 = new Predicate("father", y);
+		Predicate o1 = new Predicate("Older", new Atom[] { f1, y });
 
-		Atom f = new Predicate("f", valuef, false);
-		Atom fg = new Predicate("g", valueg, false);
+		Predicate f2 = new Predicate("father", new Atom[] { x });
+		Predicate o2 = new Predicate("Older", new Atom[] { f2, john });
 
-		valuef.add(fg);
-		valueg.add(new Variable("x", false));
+		System.out.println(o1);
+		System.out.println(o2);
+
+		System.out.println(Unifier.unify(o1, o2));
 		
-		value.add(f);
-		value.add(fg);
-
-		System.out.println(a);
-
 	}
 
 	public static Atom first(ArrayList<Atom> list) {

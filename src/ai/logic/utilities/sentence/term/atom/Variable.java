@@ -11,6 +11,11 @@ public class Variable extends Atom {
 		this.isNegative = isNegative;
 	}
 
+	public Variable(String value) {
+		this.value = value.toLowerCase();
+		this.isNegative = false;
+	}
+
 	@Override
 	public String toString() {
 		if (isNegative)

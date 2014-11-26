@@ -9,4 +9,7 @@ public abstract class Atom extends Term {
 		isNegative = !isNegative;
 	}
 
+	public boolean equals(Atom a) {
+		return this.equals(a);
+	}
 }

@@ -11,6 +11,11 @@ public class Constant extends Atom {
 		this.isNegative = isNegative;
 	}
 
+	public Constant(String value) {
+		this.value = value.toUpperCase();
+		this.isNegative = false;
+	}
+
 	@Override
 	public String toString() {
 		if (isNegative)

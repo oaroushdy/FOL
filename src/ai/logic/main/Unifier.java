@@ -15,6 +15,8 @@ public class Unifier {
 	}
 
 	public static ArrayList<Pair> unify(Atom E1, Atom E2, ArrayList<Pair> subSet) {
+		if (E1 == null | E2 == null)
+			return subSet;
 		if (subSet == null)
 			return null;
 		if (E1.equals(E2))
@@ -28,27 +30,24 @@ public class Unifier {
 		if (((Predicate) E1).getValuesLength() != ((Predicate) E2)
 				.getValuesLength())
 			return null;
-		Atom tempE1 = new Predicate(((Predicate) E1).predicateName,
-				rest(((Predicate) E1).value), E1.isNegative);
-		Atom tempE2 = new Predicate(((Predicate) E2).predicateName,
-				rest(((Predicate) E2).value), E2.isNegative);
 
-		return unify(
-				tempE1,
-				tempE2,
-				unify(first(((Predicate) E1).value),
-						first(((Predicate) E2).value), subSet));
+		Atom firstE1 = first(E1);
+		Atom firstE2 = first(E2);
+
+		ArrayList<Atom> restE1 = rest(E1);
+		ArrayList<Atom> restE2 = rest(E2);
+		if (restE1.isEmpty())
+			return unify(firstE1, firstE2, subSet);
+
+		Atom tempE1 = new Predicate(((Predicate) E1).predicateName, restE1,
+				E1.isNegative);
+		Atom tempE2 = new Predicate(((Predicate) E2).predicateName, restE2,
+				E2.isNegative);
+
+		return unify(tempE1, tempE2, unify(firstE1, firstE2, subSet));
 	}
 
-	public static Atom getAtomFromSubSet(Atom E1, ArrayList<Pair> subSet) {
-		for (Pair x : subSet) {
-			if (x.substituteBy.equals(E1))
-				return x.variable;
-		}
-		return null;
-	}
-
-	//TODO swap val with E1 in getAtomFromSubSet()
+	// TODO swap val with E1 in getAtomFromSubSet()
 	public static ArrayList<Pair> unifyVar(Variable E1, Atom E2,
 			ArrayList<Pair> subSet) {
 		Atom val;
@@ -62,6 +61,15 @@ public class Unifier {
 		return subSet;
 
 	}
+	
+	public static Atom getAtomFromSubSet(Atom E1, ArrayList<Pair> subSet) {
+		for (Pair x : subSet) {
+			if (x.substituteBy.equals(E1))
+				return x.variable;
+		}
+		return null;
+	}
+
 
 	public static boolean occurs(Variable E1, Atom E2) {
 		if (E2 instanceof Variable) // x, x
@@ -74,11 +82,41 @@ public class Unifier {
 
 	}
 
+	public static Atom first(Atom a) {
+		Predicate p;
+		if (!(a instanceof Predicate))
+			return null;
+		p = (Predicate) a;
+		if (!p.value.isEmpty())
+			return p.value.get(0);
+		else
+			return null;
+	}
+
 	public static Atom first(ArrayList<Atom> list) {
-		return list.get(0);
+		if (!list.isEmpty())
+			return list.get(0);
+		else
+			return null;
+	}
+
+	public static ArrayList<Atom> rest(Atom a) {
+		Predicate p;
+		if (!(a instanceof Predicate))
+			return null;
+		p = (Predicate) a;
+		if (p.value.isEmpty())
+			return null;
+		ArrayList<Atom> temp = new ArrayList<>();
+		for (int i = 1; i < p.value.size(); i++) {
+			temp.add(p.value.get(i));
+		}
+		return temp;
 	}
 
 	public static ArrayList<Atom> rest(ArrayList<Atom> list) {
+		if (list.isEmpty())
+			return null;
 		ArrayList<Atom> temp = new ArrayList<>();
 		for (int i = 1; i < list.size(); i++) {
 			temp.add(list.get(i));
