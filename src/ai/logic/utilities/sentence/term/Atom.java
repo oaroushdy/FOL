@@ -3,5 +3,13 @@ package ai.logic.utilities.sentence.term;
 import ai.logic.utilities.sentence.Term;
 
 public abstract class Atom extends Term {
-	//.equals()
+	// .equals() TODO using HashKey/tostring
+	@Override
+	public void negate() {
+		isNegative = !isNegative;
+	}
+
+	public boolean equals(Atom a) {
+		return this.equals(a);
+	}
 }
