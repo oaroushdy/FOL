@@ -1,0 +1,16 @@
+TESTING:
+
+ Test each Step independently:
+- Step 1: remove iff:
+	 Sentence with iff
+	 Sentence without iff
+
+- Step 2: RemoveIF():
+	 Sentence with iff 
+	 Sentence without iff 
+	
+ Function:
+ex: a iff b
+Expression exp = new Sentence ( new Variable ("a"), Connector.IFF, new variable ("b"));
+exp.Step1RemoveIFF();
+System.out.println(exp);
