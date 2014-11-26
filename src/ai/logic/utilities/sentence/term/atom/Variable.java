@@ -7,7 +7,7 @@ public class Variable extends Atom {
 	public String value;
 
 	public Variable(String value, boolean isNegative) {
-		this.value = value;
+		this.value = value.toLowerCase();
 		this.isNegative = isNegative;
 	}
 

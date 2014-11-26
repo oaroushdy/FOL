@@ -9,8 +9,34 @@ TESTING:
 	 Sentence with iff 
 	 Sentence without iff 
 	
+- Test all equals() : atoms, blocks of atoms
+	
  Function:
 ex: a iff b
 Expression exp = new Sentence ( new Variable ("a"), Connector.IFF, new variable ("b"));
 exp.Step1RemoveIFF();
 System.out.println(exp);
+
+
+
+ Unifier:
+E1 = [ a, b, c]
+first(E1) = a, Rest(E1)= [b,c]
+first(Rest(E1)) = b, Rest(Rest(E1))=c;
+E2 = [ b, v, z]
+
+function UNIFY-VAR(E1, E2, µ)
+// returns a substitution , the substitution built up so far
+	inputs: Variable E1,
+			Atom E2,
+			µ is subset;
+		
+	if (E1/val € µ )
+		then return UNIFY(val, x, µ)
+	else if (E2/val € µ )
+		then return UNIFY(E1, val, µ)
+		else if E1 occurs in E2
+			then return null;
+			else return µ.add(E2/E1)
+			
+

@@ -7,7 +7,7 @@ public class Constant extends Atom {
 	public String value;
 
 	public Constant(String value, boolean isNegative) {
-		this.value = value;
+		this.value = value.toUpperCase();
 		this.isNegative = isNegative;
 	}
 
@@ -26,7 +26,7 @@ public class Constant extends Atom {
 
 	@Override
 	public void substituteBy(Variable x, Variable y) {
-		
+
 	}
 
 	public boolean equals(Constant a) {
