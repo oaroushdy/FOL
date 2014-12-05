@@ -43,4 +43,46 @@ public class Constant extends Atom {
 			return this.value.equals(((Constant) a).value);
 		return false;
 	}
+
+	@Override
+	public void Step1EliminateIFF() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step2RemoveIF() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step3PushNegative() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step4Standardize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step5Skolomize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step6EliminateAQuantifier() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step8Extract() {
+		// TODO Auto-generated method stub
+		
+	}
 }

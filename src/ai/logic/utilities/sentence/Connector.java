@@ -1,6 +1,9 @@
 package ai.logic.utilities.sentence;
 
+import java.util.ArrayList;
+
 import ai.logic.utilities.CF;
+import ai.logic.utilities.sentence.term.atom.Variable;
 
 public class Connector implements CF {
 
@@ -47,7 +50,7 @@ public class Connector implements CF {
 	}
 
 	@Override
-	public void Step5Skolomize() {
+	public void Step5Skolomize(ArrayList<Variable> currentDomain) {
 		// TODO Auto-generated method stub
 
 	}
@@ -80,6 +83,22 @@ public class Connector implements CF {
 	public void Step3PushNegative() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public String toString() {
+		switch (type) {
+		case AND:
+			return "&";
+		case OR:
+			return "|";
+		case IF:
+			return "=>";
+		case IFF:
+			return "<=>";
+		default:
+			return "";
+		}
 	}
 
 }

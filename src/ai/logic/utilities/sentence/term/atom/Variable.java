@@ -3,7 +3,7 @@ package ai.logic.utilities.sentence.term.atom;
 import ai.logic.utilities.Common;
 import ai.logic.utilities.sentence.term.Atom;
 
-public class Variable extends Atom {
+public class Variable extends Atom{
 	public String value;
 
 	public Variable(String value, boolean isNegative) {
@@ -41,6 +41,54 @@ public class Variable extends Atom {
 	}
 
 	public boolean equals(Atom a) {
+		if (a.getClass().equals(this.getClass()))
+			return this.value.equals(((Variable) a).value);
+		return false;
+	}
+
+	@Override
+	public void Step1EliminateIFF() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step2RemoveIF() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step3PushNegative() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step4Standardize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step5Skolomize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step6EliminateAQuantifier() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Step8Extract() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public boolean equals(Object a) {
 		if (a.getClass().equals(this.getClass()))
 			return this.value.equals(((Variable) a).value);
 		return false;

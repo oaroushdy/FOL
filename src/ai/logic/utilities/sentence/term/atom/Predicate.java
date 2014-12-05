@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import ai.logic.utilities.Common;
 import ai.logic.utilities.sentence.term.Atom;
+import ai.test.CNMain;
 
 public class Predicate extends Atom {
 
@@ -17,7 +18,7 @@ public class Predicate extends Atom {
 			boolean isNegative) {
 
 		this.predicateName = predicateName;
-		this.value = value;
+		this.value = CNMain.clone.deepClone(value);
 		this.isNegative = isNegative;
 
 	}
@@ -25,7 +26,7 @@ public class Predicate extends Atom {
 	public Predicate(String predicateName, ArrayList<Atom> value) {
 
 		this.predicateName = predicateName;
-		this.value = value;
+		this.value = CNMain.clone.deepClone(value);
 		this.isNegative = false;
 
 	}
@@ -33,7 +34,8 @@ public class Predicate extends Atom {
 	public Predicate(String predicateName, Atom[] value) {
 
 		this.predicateName = predicateName;
-		this.value = new ArrayList<Atom>(Arrays.asList(value));
+		this.value = CNMain.clone.deepClone((new ArrayList<Atom>(Arrays
+				.asList(value))));
 		this.isNegative = false;
 
 	}
@@ -41,7 +43,7 @@ public class Predicate extends Atom {
 	public Predicate(String predicateName, Atom value, boolean isNegative) {
 		this.value = new ArrayList<>();
 		this.predicateName = predicateName;
-		this.value.add(value);
+		this.value.add(clone(value));
 		this.isNegative = isNegative;
 
 	}
@@ -49,14 +51,15 @@ public class Predicate extends Atom {
 	public Predicate(String predicateName, Atom value) {
 		this.value = new ArrayList<>();
 		this.predicateName = predicateName;
-		this.value.add(value);
+		this.value.add(clone(value));
 		this.isNegative = false;
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public Predicate(Predicate p, ArrayList<Variable> domain) {
 		this.predicateName = p.predicateName;
-		this.value = p.value;
+		this.value = (ArrayList<Atom>) clone(p.value);
 		this.isNegative = p.isNegative;
 
 		for (Atom x : p.value)
@@ -102,9 +105,22 @@ public class Predicate extends Atom {
 
 	@Override
 	public void substituteBy(Variable x, Variable y) {
-		int indexOfX;
-		while ((indexOfX = value.indexOf(x)) != -1) {
-			value.set(indexOfX, y);
+		for (Atom a : value)
+			a.substituteBy(x, y);
+	}
+
+	@Override
+	public void substituteBy(Variable x, Predicate y) {
+		Atom a;
+		for (int i = 0; i < value.size(); i++) {
+			a = value.get(i);
+			if (a instanceof Variable){
+				if (((Variable) a).equals(x))
+					value.set(i, clone(y));
+			}
+			else if(a instanceof Predicate)
+				a.substituteBy(x, y);
+				
 		}
 	}
 
@@ -116,6 +132,48 @@ public class Predicate extends Atom {
 		if (a.getClass().equals(this.getClass()))
 			return this.toString().equals(a.toString());
 		return false;
+	}
+
+	@Override
+	public void Step1EliminateIFF() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void Step2RemoveIF() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void Step3PushNegative() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void Step4Standardize() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void Step5Skolomize() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void Step6EliminateAQuantifier() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void Step8Extract() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

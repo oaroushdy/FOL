@@ -39,4 +39,51 @@ function UNIFY-VAR(E1, E2, µ)
 			then return null;
 			else return µ.add(E2/E1)
 			
+			
+Tested:
+
+		ArrayList<Variable> out = new ArrayList<>();
+		Variable x = new Variable("x");
+		Variable y = new Variable("y");
+		out.add(x);
+		out.add(y);
+		
+		ArrayList<Variable> out22 = new ArrayList<>();
+		Variable xs = new Variable("cos");
+		out22.add(xs);
+		
+		ArrayList<Variable> out2 = clone.deepClone(out);
+
+		Predicate fx = new Predicate("f", new Atom[] { x, y });
+		Predicate fxx = new Predicate("f", fx);
+
+		Variable sex= new Variable("cos");
+
+		Predicate fx2 = new Predicate("f", new Atom[] { sex });
+
+		Predicate fxx2 = new Predicate("f", fx2);
+		Sentence right2 = new EQuantifier(fxx2, out22);
+		Sentence f2 = new EQuantifier(right2, out);
+
+		
+		Sentence right = new EQuantifier(f2, out2);
+		Sentence in = new Sentence(fxx, Connector.AND,right);
+		Sentence f = new EQuantifier(in, out);
+		
+=================================================================
+Report 1: 
+		E:x[P(x) & A:x[Q(x) => !P(x)]]
+		clone = new Cloner();
+
+		Variable x = new Variable("x");
+		Predicate p = new Predicate("P", x);
+		Predicate p2 = new Predicate("P", x, true);
+		Predicate q = new Predicate("Q", x);
+
+		Sentence in = new Sentence(q, Connector.IF, p2);
+		Quantifier a = new AQuantifier(in, x);
+		Sentence out = new Sentence(p, Connector.AND, a);
+
+		Sentence f = new EQuantifier(out, x);
+		ClauseForm(f, true);
 
