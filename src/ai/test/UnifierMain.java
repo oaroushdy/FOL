@@ -118,7 +118,7 @@ public class UnifierMain {
 		// System.out.println(Unifier.unify(p1, p2));
 
 		// ==================================
-		// p(A,x,h(g(z))) and p(z,h(y),h(y))
+		// p(A,x,h(g(z))) and p(z,h(y),h(y)) = [A/z, h(y)/x, g(z)/y]
 		// ==================================
 		Constant a = new Constant("a");
 		Variable x = new Variable("x");
